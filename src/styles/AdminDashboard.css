@@ -1,0 +1,40 @@
+.admindashboard {
+    width: 1280px;
+    max-width: 80vw;
+    min-height: 90vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+
+    .options{
+
+        ul{
+            display: flex;
+            justify-content: end;
+            
+            list-style: none;
+            padding: 0;
+        }
+    }
+
+    .table {
+        margin-bottom: 30px;
+
+        th {
+            font-weight: 600;
+        }
+
+        td,th {
+            background-color: #fffaf6;
+            border-color: #2b1603;
+            color: black;
+        }
+
+        b {
+            font-weight: 500;
+        }
+
+    }
+}
