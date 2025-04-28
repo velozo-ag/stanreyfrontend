@@ -3,7 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 
 export const Navbar = () => {
-    const { logout } = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
 
     const handleLogout = async (e) => {
         e.preventDefault();
@@ -17,13 +17,23 @@ export const Navbar = () => {
 
     return (
         <nav className="navbar">
-            <Link to='/'>Logo</Link>
+            <Link className="logo">STANREY®</Link>
             <ul>
+                {user.perfilId == 1 ? (
+                    <li>
+                        <Link to='/admin/productos'>Admin</Link>
+                    </li>
+                ) : (
+                    <></>
+                )
+                }
                 <li>
-                    <Link to='/admin/productos'>Admin</Link>
-                </li>
-                <li>
-                    <Link onClick={(e) => handleLogout(e)}>Logout</Link>
+                    {user.idUsuario == '' ? (
+                        <Link to={'/login'} className="nav-button">Login</Link>
+                    ) : (
+                        <Link onClick={(e) => handleLogout(e)} className="nav-button">Logout</Link>
+                    )
+                    }
                 </li>
             </ul>
         </nav>

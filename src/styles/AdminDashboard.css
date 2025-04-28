@@ -8,75 +8,168 @@
     justify-content: center;
     margin: 0 auto;
 
-    .options{
+    .options {
 
-        ul{
+        ul {
             display: flex;
             justify-content: end;
-            
+
             list-style: none;
             padding: 0;
+
+            .button {
+                text-decoration: none;
+                padding: 15px 20px;
+                border-radius: 10px;
+                background-color: #222426;
+                color: #fffaf6;
+                transition: 0.1s all ease-in;
+            }
+
+            .button:hover {
+                background-color: #3e556d;
+            }
         }
     }
 
     .table {
         margin-bottom: 30px;
 
+        caption {
+            color: 1px solid black;
+            border-color: #2b1603;
+            background-color: #dfcdbe;
+            padding: 5px;
+            font-weight: 700;
+        }
+
         th {
             font-weight: 600;
         }
 
-        td,th {
+        td,
+        th {
             background-color: #fffaf6;
             border-color: #2b1603;
             color: black;
         }
-        
+
         b {
             font-weight: 500;
         }
+
+        .alta-button{
+            background-color: #326048;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+        }
         
+        .alta-button:hover{
+            background-color: #478c68;
+            cursor: pointer;
+        }
+
+        .baja-button{
+            background-color: rgb(182, 57, 57);
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        
+        .baja-button:hover{
+            background-color: rgb(183, 72, 72);
+            cursor: pointer;
+        }
+
     }
-    
-    .floating-form, .floating-form-open{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        
-        display: none;
-        opacity: 0;
-        padding: 25px;
+}
 
-        color: #fffaf6;
-        background-color: #222426;
-        border-radius: 15px;
+.floating-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
 
-        .form-group{
-            display: flex;
-            flex-direction: column;
+    visibility: hidden;
+    opacity: 0;
+    padding: 25px;
 
-            text-align: start;
-            margin: 10px;
+    color: #fffaf6;
+    background-color: #191b1c;
+    box-shadow: 0 4px 16px #00000033;
+    border-radius: 15px;
 
-            label{
-                font-size: .9rem;
-            }
+    transition: all 0.2s ease-out;
 
-            input, select{
-                padding: 10px;
-                width: 40vw;
-                border-radius: 10px;
-            }
+    .form-group {
+        display: flex;
+        flex-direction: column;
 
-            select{
-                width: 100%;
-            }
+        text-align: start;
+        margin: 10px;
+
+        label {
+            font-size: .9rem;
+        }
+
+        input,
+        select {
+            padding: 10px;
+            width: 40vw;
+            border-radius: 10px;
+        }
+
+        select {
+            width: 100%;
         }
     }
 
-    .floating-form-open{
-        opacity: 1;
-        display: block;
+}
+
+.floating-form-open {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    visibility: visible;
+    
+    opacity: 1;
+    padding: 25px;
+    
+    color: #fffaf6;
+    background-color: #191b1c;
+    box-shadow: 0 4px 16px #00000033;
+    border-radius: 15px;
+    
+    transition: all 0.2s ease-out;
+    
+    button{
+        padding: 10px 15px;
+        margin: 5px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+
+        text-align: start;
+        margin: 10px;
+
+        label {
+            font-size: .9rem;
+        }
+
+        input,
+        select {
+            padding: 10px;
+            width: 40vw;
+            border-radius: 10px;
+        }
+
+        select {
+            width: 100%;
+        }
     }
 }

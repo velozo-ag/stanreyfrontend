@@ -28,9 +28,10 @@ export const Login = () => {
     };
 
     return (
-        <div>
-            LOGIN
+        <div className='login'>
             <form onSubmit={handleSubmit}>
+                <h1>Login</h1>
+                <p>Ingresa usuario y password para continuar. </p>
                 <div className="form-group">
                     <label>Usuario</label>
                     <input
@@ -43,16 +44,16 @@ export const Login = () => {
                 <div className="form-group">
                     <label>Password</label>
                     <input
-                        type="password" 
+                        type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
                 </div>
+                {error && <div className="error-label">{error}</div>}
                 <button type="submit">Iniciar Sesión</button>
             </form>
 
-            {error && <div className="error-label">{error}</div>}
         </div>
     );
 };
