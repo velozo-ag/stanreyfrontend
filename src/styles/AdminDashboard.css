@@ -31,10 +31,52 @@
             border-color: #2b1603;
             color: black;
         }
-
+        
         b {
             font-weight: 500;
         }
+        
+    }
+    
+    .floating-form, .floating-form-open{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        
+        display: none;
+        opacity: 0;
+        padding: 25px;
 
+        color: #fffaf6;
+        background-color: #222426;
+        border-radius: 15px;
+
+        .form-group{
+            display: flex;
+            flex-direction: column;
+
+            text-align: start;
+            margin: 10px;
+
+            label{
+                font-size: .9rem;
+            }
+
+            input, select{
+                padding: 10px;
+                width: 40vw;
+                border-radius: 10px;
+            }
+
+            select{
+                width: 100%;
+            }
+        }
+    }
+
+    .floating-form-open{
+        opacity: 1;
+        display: block;
     }
 }

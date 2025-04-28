@@ -11,6 +11,8 @@ const AdminDashboard = () => {
     const [categorias, setCategorias] = useState([]);
     const [formData, setFormData] = useState({ ...Producto });
 
+    const [formMode, setFromMode] = useState('');
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -55,11 +57,30 @@ const AdminDashboard = () => {
         }
     };
 
-    const handleFileChange = (e) => {
+    const handleFileChange = async (e) => {
         const file = e.target.files[0];
         if (file) {
-            setFormData((prev) => ({ ...prev, url_imagen: URL.createObjectURL(file) }));
-            setFormData((prev) => ({ ...prev, file }));
+            const formDataImage = new FormData();
+            formDataImage.append('file', file);
+
+            try {
+                const response = await api.post('/it_admin/producto/uploadImagen', formDataImage, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+
+                const uploadedFileName = response.data;
+                setFormData((prev) => ({
+                    ...prev,
+                    url_imagen: uploadedFileName,
+                }));
+
+                console.log('Imagen subida:', uploadedFileName);
+            } catch (error) {
+                console.error('Error subiendo imagen:', error);
+                setError('Error al subir la imagen');
+            }
         }
     };
 
@@ -74,21 +95,13 @@ const AdminDashboard = () => {
                 descripcion: formData.descripcion,
                 precio: parseFloat(formData.precio),
                 stock: parseInt(formData.stock),
-                url_imagen: formData.url_imagen,
+                urlImagen: formData.url_imagen,
                 color: formData.color,
-                estado: formData.estado || 'ACTIVO',
-                id_categoria: { id_categoria: formData.id_categoria.id_categoria },
+                estado: 1,
+                categoriaId: formData.id_categoria.id_categoria,
             };
 
-            const formDataToSend = new FormData();
-            formDataToSend.append('producto', JSON.stringify(productoData));
-            if (formData.file) {
-                formDataToSend.append('imagen', formData.file);
-            }
-
-            const response = await api.post('/producto', formDataToSend, {
-                headers: { 'Content-Type': 'multipart/form-data' },
-            });
+            const response = await api.post('/it_admin/producto/save', productoData);
 
             setProductos((prev) => [...prev, response.data]);
             setFormData({ ...Producto });
@@ -101,13 +114,22 @@ const AdminDashboard = () => {
         }
     };
 
+    const handleForm = (e) => {
+        e.preventDefault();
+        if (formMode == '') {
+            setFromMode('-open');
+        } else {
+            setFromMode('');
+        }
+    }
+
     return (
         <div className="admindashboard">
             <h2>Bienvenido, {user.persona.nombre} (Admin)</h2>
             <nav className="options">
                 <ul>
                     <li>
-                        <Link to="/admin/productos/agregar" className="button">
+                        <Link onClick={(e) => handleForm(e)} className="button">
                             + Agregar Producto
                         </Link>
                     </li>
@@ -135,10 +157,11 @@ const AdminDashboard = () => {
                                 <td>
                                     {prod.urlImagen ? (
                                         <img
-                                            src={prod.urlImagen}
+                                            src={'http://localhost:8080/stanrey/producto/imagen/' + prod.urlImagen}
                                             alt={prod.nombre}
                                             style={{ width: '50px', height: '50px' }}
                                         />
+
                                     ) : (
                                         'Sin imagen'
                                     )}
@@ -147,7 +170,7 @@ const AdminDashboard = () => {
                                 <td>
                                     {prod.nombre} / {prod.categoria?.descripcion || 'Sin categoría'}
                                 </td>
-                                <td>${prod.precio.toFixed(2)}</td>
+                                <td>${prod.precio}</td>
                                 <td>{prod.stock}</td>
                                 <td>
                                     <button>Editar</button>
@@ -159,7 +182,7 @@ const AdminDashboard = () => {
                 </tbody>
             </table>
 
-            <div className="floating-form">
+            <div className={"floating-form" + formMode}>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label>Nombre</label>
@@ -213,7 +236,7 @@ const AdminDashboard = () => {
                         <label>Categoría</label>
                         <select
                             name="id_categoria"
-                            value={formData.id_categoria.id_categoria}
+                            value={formData.id_categoria.idCategoria}
                             onChange={handleInputChange}
                             required
                         >
