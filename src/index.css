@@ -141,6 +141,128 @@ body {
   }
 }
 
+.catalogo {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  padding: 2rem 15%;
+  justify-items: center;
+
+  .producto {
+    width: 100%;
+    max-width: 300px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+
+    .image-container {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      height: 350px;
+      width: 100%;
+      background-color: #f4f4f4;
+      overflow: hidden;
+    }
+
+    .thumbnail {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .info {
+      padding: 0.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+
+      p {
+        margin: 0;
+        text-align: start;
+      }
+
+      .precio {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+    }
+
+    .info h2 {
+      margin: 0;
+      padding: 0;
+      font-size: 1.2rem;
+    }
+
+
+    .btn-comprar {
+      margin-top: 15px;
+      padding: 0.8rem 1rem;
+      background-color: #1b3118;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-comprar:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+
+    .btn-comprar:not(:disabled):hover {
+      background-color: rgb(39, 105, 69);
+    }
+  }
+
+  .producto:hover {
+    transform: translateY(-4px);
+  }
+
+
+
+}
+
+.footer {
+  padding: 20px;
+  top: 0;
+  background-color: #222426;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  hr {
+    width: 80%;
+    margin: 15px;
+  }
+
+  .content {
+
+    .logo {
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 2rem;
+      color: #f4f4f4;
+    }
+
+    ul {
+      display: flex;
+      list-style: none;
+
+      color: #dddddd;
+
+      li {
+        margin: 0 10px;
+
+        p{
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
 .error-label {
   color: red;
   margin-top: 1rem;
