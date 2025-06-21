@@ -18,10 +18,35 @@ body {
   height: 100vh;
 }
 
-.admin-dashboard {
+.admindashboard {
   margin: 0;
   padding: 2rem;
   box-sizing: border-box;
+
+  .tab-nav {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    button {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      background-color: #ddd;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+  }
+
+  .tab-nav button.active {
+    background-color: #333;
+    color: #fff;
+  }
+
+  .options {
+    margin-bottom: 1rem;
+  }
 }
 
 .navbar {
@@ -226,16 +251,16 @@ body {
   max-width: 900px;
   min-height: 80vh;
   margin: 0 auto;
-  
+
   h2 {
     margin-bottom: 1rem;
   }
-  
+
   .lista-productos {
     display: flex;
     flex-direction: column;
   }
-  
+
   .item-carrito {
     display: flex;
     gap: 1rem;
@@ -258,7 +283,7 @@ body {
       flex-direction: column;
       gap: 0.5rem;
 
-      p{
+      p {
         margin: 0;
       }
     }

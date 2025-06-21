@@ -26,7 +26,7 @@ export const Catalogo = () => {
 
     return (
         <div className='catalogo'>
-            {productos.map((prod) => (
+            {productos.filter(p => p.estado === 1).map((prod) => (
                 <div className='producto' key={prod.idProducto}>
                     <div className='image-container'>
                         <img
