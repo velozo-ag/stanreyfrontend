@@ -223,6 +223,100 @@ body {
 
 }
 
+.carrito {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  
+  h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .lista-productos {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .item-carrito {
+    display: flex;
+    gap: 1rem;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1rem;
+    align-items: center;
+
+    .thumbnail {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      background-color: #f0f0f0;
+    }
+
+    .info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      p{
+        margin: 0;
+      }
+    }
+
+    .info h4 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .cantidad {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cantidad button {
+      width: 28px;
+      height: 28px;
+      font-size: 16px;
+      border: none;
+      background-color: #ddd;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .btn-eliminar {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 5px;
+      cursor: pointer;
+      width: fit-content;
+    }
+  }
+
+
+  .btn-finalizar {
+    margin-top: 1rem;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .total {
+    margin-top: 2rem;
+    text-align: right;
+    font-size: 1.2rem;
+  }
+}
+
+
+
 .footer {
   padding: 20px;
   top: 0;
@@ -255,7 +349,7 @@ body {
       li {
         margin: 0 10px;
 
-        p{
+        p {
           padding: 0;
         }
       }
