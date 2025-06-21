@@ -9,6 +9,7 @@ import { Navbar } from './components/Navbar';
 import './App.css'
 import { Footer } from './components/Footer';
 import { Signup } from './pages/SignUp';
+import { Historial } from './pages/Historial';
 
 const PrivateRoute = ({ children, requiredProfileId }) => {
   const { isAuthenticated, user } = useContext(AuthContext);
@@ -31,6 +32,7 @@ function App() {
       <BrowserRouter>
         <Navbar></Navbar>
         <Routes>
+          <Route path="/historial" element={<Historial />} />
           <Route path="/catalogo" element={<Catalogo />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />

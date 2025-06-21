@@ -219,13 +219,12 @@ body {
     transform: translateY(-4px);
   }
 
-
-
 }
 
 .carrito {
   padding: 2rem;
   max-width: 900px;
+  min-height: 80vh;
   margin: 0 auto;
   
   h2 {

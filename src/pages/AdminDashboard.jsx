@@ -11,6 +11,7 @@ const AdminDashboard = () => {
     const [productos, setProductos] = useState([]);
     const [categorias, setCategorias] = useState([]);
 
+    const [productoEditando, setProductoEditando] = useState(null);
     const [formMode, setFormMode] = useState('');
 
     const [error, setError] = useState('');
@@ -54,22 +55,26 @@ const AdminDashboard = () => {
     const handleStateChange = async (e, prod) => {
         e.preventDefault();
 
-        if (prod.estado == 1) {
-            try {
-                const response = await api.put('/it_admin/producto/baja/' + prod.idProducto);
-                fetchProductos();
-            } catch (error) {
-                setError('Error al dar de baja: ' + prod.nombre);
-            }
-        } else {
-            try {
-                const response = await api.put('/it_admin/producto/alta/' + prod.idProducto);
-                fetchProductos();
-            } catch (error) {
-                setError('Error al dar de baja: ' + prod.nombre);
-            }
+        const confirmacion = window.confirm(
+            prod.estado === 1
+                ? `¿Estás seguro de dar de baja el producto "${prod.nombre}"?`
+                : `¿Estás seguro de dar de alta el producto "${prod.nombre}"?`
+        );
+
+        if (!confirmacion) return;
+
+        try {
+            const endpoint = prod.estado === 1
+                ? '/it_admin/producto/baja/' + prod.idProducto
+                : '/it_admin/producto/alta/' + prod.idProducto;
+
+            await api.put(endpoint);
+            fetchProductos();
+        } catch (error) {
+            setError(`Error al cambiar estado de: ${prod.nombre}`);
         }
-    }
+    };
+
 
     return (
         <div className="admindashboard">
@@ -124,6 +129,16 @@ const AdminDashboard = () => {
                                 <td>
                                     <button onClick={(e) => handleStateChange(e, prod)}
                                         className='baja-button'>Baja</button>
+                                    <button
+                                        className='modificar-button'
+                                        onClick={() => {
+                                            setProductoEditando(prod);
+                                            setFormMode('-open');
+                                        }}
+                                    >
+                                        Modificar
+                                    </button>
+
                                 </td>
                             </tr>
                         ))}
@@ -170,13 +185,26 @@ const AdminDashboard = () => {
                                 <td>
                                     <button onClick={(e) => handleStateChange(e, prod)}
                                         className='alta-button'>Alta</button>
+                                    <button
+                                        className='modificar-button'
+                                        onClick={() => {
+                                            setProductoEditando(prod);
+                                            setFormMode('-open');
+                                        }}
+                                    >
+                                        Modificar
+                                    </button>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>)}
 
-            <ProductoForm formFunctions={[formMode, setFormMode, setProductos, fetchProductos]} ></ProductoForm>
+            <ProductoForm
+                formFunctions={[formMode, setFormMode, setProductos, fetchProductos]}
+                productoEditando={productoEditando}
+                setProductoEditando={setProductoEditando}
+            />
         </div >
     );
 };

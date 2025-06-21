@@ -31,9 +31,14 @@ export const Navbar = () => {
                         <Link to='/admin/productos'>Admin</Link>
                     </li>
                 ) :
-                    <li>
-                        <Link to={'/carrito'}><LuShoppingCart /></Link>
-                    </li>
+                    <>
+                        <li>
+                            <Link to={'/historial'}>Historial</Link>
+                        </li>
+                        <li>
+                            <Link to={'/carrito'}><LuShoppingCart /></Link>
+                        </li>
+                    </>
                 }
                 {user.idUsuario == '' ? (<>
                     <li>
