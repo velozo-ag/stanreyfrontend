@@ -12,21 +12,24 @@ export const Navbar = () => {
         const success = await logout();
 
         if (success) {
-            navigate('/');
+            navigate('/catalogo');
         }
     };
 
     return (
         <nav className="navbar">
             <Link className="logo">STANREY®</Link>
-            {user.idUsuario == '' ? (<></>) : (
+            {user != null ? (
                 <span style={{ color: 'white' }}>Bienvenido <b>{user.usuario}</b></span>
+            ) : (
+                <>
+                </>
             )}
             <ul>
                 <li>
                     <Link to='/catalogo'>Catalogo</Link>
                 </li>
-                {user.perfilId == 1 ? (
+                {user != null && user.perfilId == 1 ? (
                     <li>
                         <Link to='/admin/productos'>Admin</Link>
                     </li>
@@ -40,7 +43,7 @@ export const Navbar = () => {
                         </li>
                     </>
                 }
-                {user.idUsuario == '' ? (<>
+                {user == null ? (<>
                     <li>
                         <Link to={'/login'} className="nav-button">LogIn</Link>
                     </li>

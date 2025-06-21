@@ -7,9 +7,9 @@ import '../styles/AdminDashboard.css';
 const AdminDashboard = () => {
     const { user } = useContext(AuthContext);
     const [activeTab, setActiveTab] = useState('productos');
-
     const [productos, setProductos] = useState([]);
     const [facturas, setFacturas] = useState([]);
+    const [detalles, setDetalles] = useState({});
     const [formMode, setFormMode] = useState('');
     const [productoEditando, setProductoEditando] = useState(null);
     const [error, setError] = useState('');
@@ -61,10 +61,23 @@ const AdminDashboard = () => {
         }
     };
 
+    const handleVerDetalles = async (idFactura) => {
+        try {
+            const response = await api.get(`/factura/detalles/${idFactura}`);
+            setDetalles(prev => ({
+                ...prev,
+                [idFactura]: response.data || []
+            }));
+        } catch (error) {
+            console.error('Error al cargar detalles:', error);
+            setError('Error al cargar detalles: ' + (error.response?.data?.message || error.message));
+        }
+    };
+
     return (
         <div className="admindashboard">
             <h2>Admin Dashboard</h2>
-
+            {error && <p className="error-label">{error}</p>}
             <nav className="tab-nav">
                 <button onClick={() => setActiveTab('productos')} className={activeTab === 'productos' ? 'active' : ''}>
                     Productos
@@ -193,7 +206,7 @@ const AdminDashboard = () => {
                                     <th>Cliente</th>
                                     <th>Fecha</th>
                                     <th>Total</th>
-                                    <th>Detalle</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -202,13 +215,46 @@ const AdminDashboard = () => {
                                         <td>{factura.idFactura}</td>
                                         <td>{factura.usuario?.persona?.nombre} {factura.usuario?.persona?.apellido}</td>
                                         <td>{new Date(factura.fecha).toLocaleString()}</td>
-                                        <td>${factura.total}</td>
-                                        <td><button className="ver-detalle-button">Ver Detalle</button></td>
+                                        <td>${factura.importeTotal}</td>
+                                        <td>
+                                            <button
+                                                className="ver-detalle-button"
+                                                onClick={() => handleVerDetalles(factura.idFactura)}
+                                            >
+                                                Ver Detalle
+                                            </button>
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
                     )}
+
+                    {Object.keys(detalles).map((idFactura) => (
+                        detalles[idFactura].length > 0 && (
+                            <div key={idFactura} className="detalle-factura">
+                                <h3>Detalles de Factura #{idFactura}</h3>
+                                <table className="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {detalles[idFactura].map((detalle) => (
+                                            <tr key={detalle.idDetalleFactura}>
+                                                <td>{detalle.producto?.nombre}</td>
+                                                <td>{detalle.cantidad}</td>
+                                                <td>${detalle.subtotal}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        )
+                    ))}
                 </>
             )}
         </div>

@@ -36,7 +36,6 @@ body {
       font-weight: bold;
       border-radius: 5px;
     }
-
   }
 
   .tab-nav button.active {
@@ -47,10 +46,13 @@ body {
   .options {
     margin-bottom: 1rem;
   }
+
+  .detalle-factura {
+    margin-top: 2rem;
+  }
 }
 
 .navbar {
-  /* width: 100%; */
   padding: 20px;
   top: 0;
   background-color: #222426;
@@ -135,7 +137,6 @@ body {
     border-radius: 15px;
     box-shadow: 0 4px 16px #00000033;
 
-
     h1 {
       margin-bottom: 0;
     }
@@ -153,13 +154,11 @@ body {
         padding: 10px;
         background-color: #222623;
       }
-
     }
 
     button {
       margin: 15px;
       padding: 10px;
-
       border-radius: 5px;
       cursor: pointer;
     }
@@ -209,7 +208,6 @@ body {
         font-size: 2rem;
         font-weight: bold;
       }
-
     }
 
     .info h2 {
@@ -217,7 +215,6 @@ body {
       padding: 0;
       font-size: 1.2rem;
     }
-
 
     .btn-comprar {
       margin-top: 15px;
@@ -243,7 +240,6 @@ body {
   .producto:hover {
     transform: translateY(-4px);
   }
-
 }
 
 .carrito {
@@ -317,9 +313,13 @@ body {
       border-radius: 5px;
       cursor: pointer;
       width: fit-content;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-eliminar:hover {
+      background-color: #c0392b;
     }
   }
-
 
   .btn-finalizar {
     margin-top: 1rem;
@@ -330,6 +330,11 @@ body {
     border-radius: 6px;
     font-size: 1rem;
     cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn-finalizar:hover {
+    background-color: #219653;
   }
 
   .total {
@@ -339,7 +344,33 @@ body {
   }
 }
 
+.historial {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
 
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  .detalle-factura {
+    margin-top: 2rem;
+  }
+
+  .ver-detalle-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .ver-detalle-button:hover {
+    background-color: #2980b9;
+  }
+}
 
 .footer {
   padding: 20px;
@@ -356,7 +387,6 @@ body {
   }
 
   .content {
-
     .logo {
       text-decoration: none;
       font-weight: 700;
@@ -367,7 +397,6 @@ body {
     ul {
       display: flex;
       list-style: none;
-
       color: #dddddd;
 
       li {
@@ -384,4 +413,45 @@ body {
 .error-label {
   color: red;
   margin-top: 1rem;
+}
+
+.baja-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.baja-button:hover {
+  background-color: #c0392b;
+}
+
+.alta-button {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.alta-button:hover {
+  background-color: #27ae60;
+}
+
+.modificar-button {
+  background-color: #f1c40f;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modificar-button:hover {
+  background-color: #e67e22;
 }
